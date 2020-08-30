@@ -1,4 +1,7 @@
 const { App } = require("@slack/bolt");
+require("dotenv").config();
+
+console.log(process.env.SLACK_BOT_TOKEN);
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -10,6 +13,7 @@ app.message("hello", async ({ message, say }) => {
 });
 
 (async () => {
-  await app.start(process.env.PORT);
+  const port = process.env.PORT || 8080;
+  await app.start(port);
   console.log(`⚡ Bolt app is running!`);
 })();
